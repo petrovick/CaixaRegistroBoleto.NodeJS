@@ -26,7 +26,9 @@ PORT=5006
 Access_Control_Allow_Origin=*
 ```
 
-CAREFUL: URL_CONSULTA key don't need to be changed.
+CAREFUL:
+    1) 'URL_CAIXA', 'URL_CONSULTA_METHOD' and 'URL_REGISTRO_METHOD' key don't need to be changed.
+    2) 'Access_Control_Allow_Origin': define cors configuration as needed, the default is '*'.
 
 ## Before running the app
 
@@ -37,8 +39,17 @@ You should have [node][node] installed on your machine.
 ```bash
 npm install
 ```
+or
+```
+yarn
+```
 
+### DEBUG
 ```bash
+npm run dev or yarn dev
+```
+### PROD
+```
 npm start
 ```
 

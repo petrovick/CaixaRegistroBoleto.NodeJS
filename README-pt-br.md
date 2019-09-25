@@ -5,12 +5,32 @@
 Você deve criar o arquivo .env de acordo com o arquivo .env.example da raiz do projeto.
 
 ```
-AGENCY=XXXX
-URL_CONSULTA=https://barramento.caixa.gov.br/sibar/ConsultaCobrancaBancaria/Boleto
-CNPJ_BENEFICIARIO=XXXXXXXXXXXXXX
+
+NODE_ENV=production
+URL_CAIXA=https://barramento.caixa.gov.br/sibar/
+URL_CONSULTA_METHOD=ConsultaCobrancaBancaria/Boleto
+URL_REGISTRO_METHOD=ManutencaoCobrancaBancaria/Boleto/Externo
+
+URL_API_TOKEN=XXXXXXUrlToGetTokenToAccessLogServiceXXXXXX
+URL_API_TOKEN_METHOD=XXTokenMethodNameXX
+
+URL_API_LOG=XXXXXXUrlLogServiceXXXXXX
+URL_API_LOG_METHOD=XXXXXXUrlMethodLogServiceXXXXXX
+
+CNPJ_BENEFICIARIO=XXXXCNPJXXXXXXX
+USAR_SERVICO_LOG=[TRUE OR FALSE(Without brackets)]
+USAR_PROXY_SERVICO_LOG=false
+USAR_PROXY_SERVICO_CAIXA=true
+HTTP_PROXY_URL=proxy.company.com.br
+HTTP_PROXY_PORT=9999
+PORT=5006
+Access_Control_Allow_Origin=*
 ```
 
-CUIDADO: O valor da chave URL_CONSULTA não deve ser alterado.
+CUIDADOS:
+    1) O valor da chave 'URL_CAIXA', 'URL_CONSULTA_METHOD' e 'URL_REGISTRO_METHOD' não deve ser alterado.
+    2) 'Access_Control_Allow_Origin': configure cors de acordo com suas necessidades. Por padrão está '*'.
+
 
 ## Antes de rodar o app
 
@@ -21,8 +41,16 @@ Você deve ter o [node][node] instalado na sua máquina.
 ```bash
 npm install
 ```
+```
+yarn
+```
 
+### DEBUG
 ```bash
+npm run dev ou yarn dev
+```
+### PROD
+```
 npm start
 ```
 
