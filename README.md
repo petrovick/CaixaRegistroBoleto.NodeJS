@@ -28,7 +28,7 @@ Access_Control_Allow_Origin=*
 
 CAREFUL:
     1) 'URL_CAIXA', 'URL_CONSULTA_METHOD' and 'URL_REGISTRO_METHOD' key don't need to be changed.
-    2) 'Access_Control_Allow_Origin': define cors configuration as needed, the default is '*'.
+    2) 'Access_Control_Allow_Origin': you should define cors configuration as needed, the default is '*'.
 
 ## Before running the app
 
