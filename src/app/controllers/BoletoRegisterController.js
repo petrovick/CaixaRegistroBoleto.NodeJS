@@ -12,36 +12,11 @@ var apiCaixa = require('../services/apiCaixa')
 
 class BoletoRegisterController {
     async index(req, res) {
-        var {
-            ip,
-            hostname,
-            codigoBeneficiario,
-            dataEmissao,
-            dataVencimento,
-            valor,
-            jurosMora,
-            posVencimento,
-            nossoNumero,
-            numeroDocumento,
-            pagador,
-            sacadorAvalista,
-            multa
+        var {ip,hostname,codigoBeneficiario,dataEmissao,dataVencimento,valor,
+            jurosMora,posVencimento,nossoNumero,numeroDocumento,pagador,
+            sacadorAvalista,multa
          } = req.body;
 
-        if(dataVencimento == undefined || dataVencimento == '') {
-            throw "Defina o valor da tag dataVencimento.";
-        }
-        else if(dataEmissao == undefined || dataEmissao == '') {
-            throw "Defina o valor da tag dataEmissao.";
-        }
-
-        if(dataVencimento.length > 10)
-        {
-            dataVencimento = dataVencimento.substring(0, 10)
-        }
-        if(dataEmissao.length > 10) {
-            dataEmissao = dataEmissao.substring(0, 10);
-        }
         var logRequisicao = undefined;
 
         /**
@@ -62,22 +37,11 @@ class BoletoRegisterController {
 
         var hash = AuthHash(codigoBeneficiario, nossoNumero, dataVencimento, valor , process.env.CNPJ_BENEFICIARIO);
 
+        /**/
         const xmlQuery = MountRegisterXml(
-            hash,
-            process.env.AGENCY,
-            ip,
-            process.env.CNPJ_BENEFICIARIO,
-            codigoBeneficiario,
-            dataEmissao,
-            dataVencimento,
-            valor,
-            jurosMora,
-            posVencimento,
-            nossoNumero,
-            numeroDocumento,
-            pagador,
-            sacadorAvalista,
-            multa);
+            hash,process.env.AGENCY,ip,process.env.CNPJ_BENEFICIARIO,
+            codigoBeneficiario,dataEmissao,dataVencimento,valor,jurosMora,
+            posVencimento,nossoNumero,numeroDocumento,pagador,sacadorAvalista,multa);
 
         var response = {};
         var statusCode = {};
@@ -95,7 +59,7 @@ class BoletoRegisterController {
 
         }
         catch(err) {
-            return res.status(200).json(
+            return res.status(500).json(
                 {
                     mensagem: err + '',
                     situacao: 500

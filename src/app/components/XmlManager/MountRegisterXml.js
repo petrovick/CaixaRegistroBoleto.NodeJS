@@ -15,6 +15,11 @@ module.exports = function(
     multa)
 {
     const horaAgora = moment().format("YYYYMMDDHHmmss");
+
+    dataVencimento = dataVencimento.length > 10 ? dataVencimento.substring(0, 10) : dataVencimento;
+    dataEmissao = dataEmissao.length > 10 ? dataEmissao.substring(0, 10) : dataEmissao;
+
+
     var xmlRegister =
         '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"> ' +
         '    <soapenv:Body xmlns:ns3="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria/boleto/externo" xmlns:ns2="http://caixa.gov.br/sibar"> ' +
@@ -74,7 +79,7 @@ module.exports = function(
                     xmlRegister += "                  <VALOR>0.0</VALOR> ";
                 }
             }
-            else 
+            else
             {
                 xmlRegister += "                  <TIPO>ISENTO</TIPO> ";
                 xmlRegister += "                  <VALOR>0.0</VALOR> ";
