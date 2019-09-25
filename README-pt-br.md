@@ -41,14 +41,20 @@ Você deve ter o [node][node] instalado na sua máquina.
 ```bash
 npm install
 ```
+ou
 ```
 yarn
 ```
 
 ### DEBUG
 ```bash
-npm run dev ou yarn dev
+npm run dev
 ```
+ou
+```bash
+yarn dev
+```
+
 ### PROD
 ```
 npm start
