@@ -89,3 +89,6 @@ typings/
 .dynamodb/
 
 Insomnia.json
+
+.env
+.env.production
