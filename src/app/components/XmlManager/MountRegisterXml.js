@@ -113,7 +113,7 @@ module.exports = function(
                 "                  <CNPJ>" + pagador.cnpj + "</CNPJ> " +
                 "                  <RAZAO_SOCIAL>"+ (pagador.razaoSocial ? pagador.razaoSocial.replace('&', 'e').substring(0, 40) : '') + "</RAZAO_SOCIAL> ";
         }
-        if(pagador.endereco)
+        if(pagador.endereco && pagador.endereco.cep)
         {
             xmlRegister +=
                 "                  <ENDERECO> " +
