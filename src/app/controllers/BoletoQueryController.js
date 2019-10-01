@@ -15,7 +15,7 @@ class BoletoQueryController {
   async index (req, res) {
     const { ip, hostname, codigoBeneficiario: beneficiaryCode, nossoNumero: ourNumber } = req.body
 
-    console.log(req.body);
+    //console.log(req.body);
     const headersConsulta = {
       'Content-Type': 'text/xml;charset=UTF-8'
     }
