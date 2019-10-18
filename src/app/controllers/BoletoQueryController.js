@@ -30,6 +30,7 @@ class BoletoQueryController {
         IP: ip,
         NomeDaMaquina: hostname
       }
+      //console.log(JSON.stringify(logRequisicao));
       logRequisicao = await ServicoLog(logRequisicao)
     }
 
@@ -67,22 +68,28 @@ class BoletoQueryController {
 
     var codRetorno = await XmlManager.GetXmlNodeValue(xmlDoc, 'COD_RETORNO')
     var mensagem = ''
-
+    var mensagemExcecao = ''
+    
     if (codRetorno !== '00') {
-      mensagem = await XmlManager.GetXmlNodeValue(xmlDoc, 'DADOS.EXCECAO')
+      mensagem = await XmlManager.GetXmlNodeValue(xmlDoc, 'consultacobrancabancaria:SERVICO_SAIDA.MSG_RETORNO')
+      mensagemExcecao = await XmlManager.GetXmlNodeValue(xmlDoc, 'DADOS.EXCECAO')
+      
       return res.status(200).json({
+        mensagemExcecao,
         mensagem,
-        status: 500
+        situacao: 500
       })
+
     } else {
       mensagem = await XmlManager.GetXmlNodeValue(xmlDoc, 'MENSAGENS.RETORNO')
-
+      mensagem += await XmlManager.GetXmlNodeValue(xmlDoc, 'consultacobrancabancaria:SERVICO_SAIDA.MSG_RETORNO')
       codRetorno = await XmlManager.GetXmlNodeValue(xmlDoc, 'CONTROLE_NEGOCIAL.COD_RETORNO')
-
+      mensagemExcecao = await XmlManager.GetXmlNodeValue(xmlDoc, 'DADOS.EXCECAO')
       if (codRetorno != '0') {
         return res.status(200).json({
+          mensagemExcecao,
           mensagem,
-          status: 500
+          situacao: 500
         })
       } else {
         

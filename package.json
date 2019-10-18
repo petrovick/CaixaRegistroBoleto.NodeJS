@@ -1,6 +1,6 @@
 {
     "name": "br.edu.unipam.node.caixa",
-    "version": "1.2.11",
+    "version": "1.2.13",
     "description": "",
     "main": "index.js",
     "scripts": {

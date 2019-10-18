@@ -15,7 +15,8 @@ const controllers = require("./app/controllers");
 
 routes.get("/test/index", controllers.TestController.index);
 
-routes.post("/ConsultaBoleto/index", handle(controllers.BoletoQueryController.index));
+routes.post("/ConsultaBoleto/index", handle(controllers.BoletoQueryController.index));//DO NOT USE, it Will be disabled soon
+routes.post("/ConsultarBoleto/index", handle(controllers.BoletoQueryController.index));
 routes.post("/RegistrarBoleto/index", handle(controllers.BoletoRegisterController.index));
 routes.get("/DadosEnv/index", handle(controllers.DadosEnvController.index));
 

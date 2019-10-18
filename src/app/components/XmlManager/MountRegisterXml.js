@@ -1,4 +1,5 @@
 const moment = require("moment");
+var StringCleaner = require('../../Validators/StringCleaner')
 
 module.exports = function(
     hash, agency, ip, cnpjBeneficiario,
@@ -18,8 +19,9 @@ module.exports = function(
 
     dataVencimento = dataVencimento.length > 10 ? dataVencimento.substring(0, 10) : dataVencimento;
     dataEmissao = dataEmissao.length > 10 ? dataEmissao.substring(0, 10) : dataEmissao;
-
-
+    
+    numeroDocumento = numeroDocumento.substring(numeroDocumento.length - 10);
+    
     var xmlRegister =
         '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"> ' +
         '    <soapenv:Body xmlns:ns3="http://caixa.gov.br/sibar/manutencao_cobranca_bancaria/boleto/externo" xmlns:ns2="http://caixa.gov.br/sibar"> ' +
@@ -111,15 +113,15 @@ module.exports = function(
         else if(pagador.cnpj)  {
             xmlRegister +=
                 "                  <CNPJ>" + pagador.cnpj + "</CNPJ> " +
-                "                  <RAZAO_SOCIAL>"+ (pagador.razaoSocial ? pagador.razaoSocial.replace('&', 'e').substring(0, 40) : '') + "</RAZAO_SOCIAL> ";
+                "                  <RAZAO_SOCIAL>"+ (pagador.razaoSocial ? StringCleaner.RemoveEspecialCharacters(pagador.razaoSocial).substring(0, 40) : '') + "</RAZAO_SOCIAL> ";
         }
         if(pagador.endereco && pagador.endereco.cep)
         {
             xmlRegister +=
                 "                  <ENDERECO> " +
-                "                     <LOGRADOURO>" + (pagador.endereco.logradouro ? pagador.endereco.logradouro.substring(0, 40) : '' ) + "</LOGRADOURO> " +
-                "                     <BAIRRO>" + (pagador.endereco.bairro ? pagador.endereco.bairro.substring(0, 15) : '') + "</BAIRRO> " +
-                "                     <CIDADE>" + (pagador.endereco.cidade ? pagador.endereco.cidade.substring(0, 15) : '') + "</CIDADE> " +
+                "                     <LOGRADOURO>" + (pagador.endereco.logradouro ? StringCleaner.RemoveEspecialCharacters(pagador.endereco.logradouro).substring(0, 40) : '' ) + "</LOGRADOURO> " +
+                "                     <BAIRRO>" + (pagador.endereco.bairro ? StringCleaner.RemoveEspecialCharacters(pagador.endereco.bairro).substring(0, 15) : '') + "</BAIRRO> " +
+                "                     <CIDADE>" + (pagador.endereco.cidade ? StringCleaner.RemoveEspecialCharacters(pagador.endereco.cidade).substring(0, 15) : '') + "</CIDADE> " +
                 "                     <UF>" + (pagador.endereco.uf ? pagador.endereco.uf.substring(0, 2) : '' )+ "</UF> " +
                 "                     <CEP>" + (pagador.endereco.cep ? (pagador.endereco.cep + '').substring(0,8) : '') + "</CEP> " +
                 "                  </ENDERECO> ";

@@ -1,5 +1,6 @@
 module.exports = function(body) {
     const { codigoBeneficiario, nossoNumero, numeroDocumento, valor, dataVencimento, dataEmissao, jurosMora ,posVencimento, pagador} = body;
+    
 
     if(codigoBeneficiario == undefined || codigoBeneficiario == 0) {
         throw "Defina o valor da tag codigoBeneficiario.";
@@ -10,8 +11,9 @@ module.exports = function(body) {
     else if(numeroDocumento == undefined || numeroDocumento == 0) {
         throw "Defina o valor da tag numeroDocumento.";
     }
-    else if((numeroDocumento + '' ).length != 11) {
-        throw "'numeroDocumento' deve conter 11 dígitos.";
+    else if((numeroDocumento + '').length < 10 )
+    {
+        throw "'numeroDocumento' deve conter pelo menos 10 dígitos.";
     }
     else if((nossoNumero + '' ).length != 17) {
         throw "'nossoNumero' deve conter 17 dígitos.";
