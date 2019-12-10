@@ -43,10 +43,18 @@ class BoletoQueryController {
     var response = {}
     var statusCode = {}
     try {
+      //console.log('Chegou aqui')
       const { data, status } = await apiCaixa.post(process.env.URL_CONSULTA_METHOD, xmlQuery) // Optional timeout parameter(milliseconds)
-      //console.log(data)
+      
       response = data
       statusCode = status
+
+      /*Log CEF Response*/
+      if(logRequisicao) {
+          logRequisicao.Outros = JSON.stringify(response);
+          logRequisicao = await ServicoLog(logRequisicao);
+      }
+      
     } catch (err) {
       return res.status(200).json(
         {
@@ -85,6 +93,8 @@ class BoletoQueryController {
       mensagem += await XmlManager.GetXmlNodeValue(xmlDoc, 'consultacobrancabancaria:SERVICO_SAIDA.MSG_RETORNO')
       codRetorno = await XmlManager.GetXmlNodeValue(xmlDoc, 'CONTROLE_NEGOCIAL.COD_RETORNO')
       mensagemExcecao = await XmlManager.GetXmlNodeValue(xmlDoc, 'DADOS.EXCECAO')
+
+
       if (codRetorno != '0') {
         return res.status(200).json({
           mensagemExcecao,

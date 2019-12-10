@@ -51,7 +51,7 @@ class BoletoRegisterController {
             response = data;
             statusCode = status;
 
-            /**/
+            /*Log CEF Response*/
             if(logRequisicao) {
                 logRequisicao.Outros = JSON.stringify(response);
                 logRequisicao = await ServicoLog(logRequisicao);
@@ -96,9 +96,9 @@ class BoletoRegisterController {
             if(codRetorno == 0)
             {
                 const codigoDeBarras =  await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.CODIGO_BARRAS");
-                const linhaDigitavel =     await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.LINHA_DIGITAVEL");
-                const nossoNumero =   await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.NOSSO_NUMERO");
-                const url =       await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.URL");
+                const linhaDigitavel = await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.LINHA_DIGITAVEL");
+                const nossoNumero = await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.NOSSO_NUMERO");
+                const url = await XmlManager.GetXmlNodeValue(xmlDoc,"INCLUI_BOLETO.URL");
 
                 return res.status(200).json({
                     mensagem,

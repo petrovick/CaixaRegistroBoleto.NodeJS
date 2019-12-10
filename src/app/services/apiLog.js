@@ -24,10 +24,10 @@ apiLog.interceptors.request.use(async function (config) {
         }
 
     }
-
+    //console.log('Antes do Token')
     const { data } = await apiToken.get(process.env.URL_API_TOKEN_METHOD);
     const token = data.Result;
-
+    //console.log(`Depois do token ${token}`)
     const headers = { ...config.headers };
     if (token) {
         headers.Authorization = `Bearer ${token}`;
