@@ -23,7 +23,7 @@
         "moment": "^2.24.0",
         "path": "^0.12.7",
         "require-dir": "^1.2.0",
-        "xmldom": "^0.1.27",
+        "xmldom": "^0.5.0",
         "youch": "^2.0.10"
     },
     "devDependencies": {
